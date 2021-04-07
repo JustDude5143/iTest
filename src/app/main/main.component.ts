@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CommonService } from '../common.service';
 import { DeleteComponent } from '../delete/delete.component';
 import { EditComponent } from '../edit/edit.component';
-import data from './data.json';
+// import data from './data.json';
 
 @Component({
   selector: 'app-main',
@@ -14,36 +15,35 @@ export class MainComponent implements OnInit {
   //Variable section
   public male:number=0;
   public female:number=0;
+  public userdata;
 
-  userdata:{
-    Id:number,
-    Name: string,
-    Email: string,
-    Gender: string,
-    Address:string,
-    DateOfBirth: string,}[]=data
-
+  
   constructor(
-    public _matDialog:MatDialog
+    public _matDialog:MatDialog,
+    private _commonService:CommonService
   ) { }
 
+  
+  
 
   ngOnInit(): void {
+    this.userdata = this._commonService.userData;  
   }
 
+  
   maleCount()
   {
-    return this.userdata.filter(c=>c.Gender=='Male').length;
+    return this._commonService.userData.filter(c=>c.Gender=='Male').length;
   }
   femaleCount()
   {
-    return this.userdata.filter(c=>c.Gender=='Female').length;
+    return this._commonService.userData.filter(c=>c.Gender=='Female').length;
   }
 
 
   delete(id,name)
   {
-    const index = this.userdata.findIndex(m=>m.Id == id); 
+    const index = this._commonService.userData.findIndex(m=>m.Id == id); 
     console.log(index);
     if(index !== undefined)
     {
@@ -63,8 +63,8 @@ export class MainComponent implements OnInit {
       dialogRef.afterClosed().subscribe((data:any)=>{
         if(data)
         {
-          this.userdata.splice(index,1);
-          console.log(this.userdata);
+          this._commonService.userData.splice(index,1);
+          console.log(this._commonService.userData);
         }
         else
         {
@@ -84,7 +84,7 @@ export class MainComponent implements OnInit {
 
   edit(id,name,email,gender,address,)
   {
-    const index = this.userdata.findIndex(m=>m.Id !== id); 
+    const index = this._commonService.userData.findIndex(m=>m.Id !== id); 
     if(index !== undefined)
     {
     const dialogConfig = new MatDialogConfig();
