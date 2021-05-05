@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Edit</h1>
+<h1 mat-dialog-title>Add User</h1>
 <div mat-dialog-content>
-    <form [formGroup]="editForm" (ngSubmit)="editFormSubmit()">
+    <form [formGroup]="addForm" (ngSubmit)="addFormSubmit()">
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput placeholder="Name" formControlName="name"
@@ -11,8 +11,8 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <input matInput placeholder="email" formControlName="description"
-                [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+            <input matInput placeholder="email" formControlName="description" 
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors}">
                 <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                 <div *ngIf="f.description.errors.required">Description is required</div>
             </div>
@@ -27,8 +27,8 @@
             </div>
         </mat-form-field>
         <div mat-dialog-actions>
-            <button mat-button mat-dialog-close (click)="close()">Close</button>
-            <button type="submit" mat-button mat-dialog-close>Submit</button>
+            <button mat-button mat-dialog-close>Close</button>
+            <button type="submit" mat-button >Add</button>
         </div>
     </form>
 </div>

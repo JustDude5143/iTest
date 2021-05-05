@@ -24,8 +24,6 @@ export class DeleteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
-
   deleteTrue()
   {
     this.dialogRef.close(this.isDelete);  

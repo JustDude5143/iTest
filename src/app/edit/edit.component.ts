@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CommonService } from '../common.service';
+import { DeleteComponent } from '../delete/delete.component';
 
 @Component({
   selector: 'app-edit',
@@ -10,54 +12,60 @@ import { CommonService } from '../common.service';
 })
 export class EditComponent implements OnInit {
 
-  minDate: Date;
-  maxDate: Date;
+  public id;
+  public name;
+  public description;
+  public price;
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private _commonService:CommonService,
-    private _router:Router
+    private _commonService: CommonService,
+    private _router: Router,
+    private _dialogRef: MatDialogRef<DeleteComponent>,
+    @Inject(MAT_DIALOG_DATA) data
   ) {
-    // Set the minimum to January 1st 20 years in the past and December 31st a year in the future.
-    const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 20, 0, 1);
-    this.maxDate = new Date(currentYear + 1, 11, 31);
+
+    this.id = data.Id;
+    this.name = data.Name;
+    this.description = data.Description;
+    this.price = data.Price;
   }
   editForm: FormGroup;
   submitted = false;
   router: any;
 
- 
+
   ngOnInit() {
+    let numericRegex = /^-?(0|[1-9]\d*)?$/;
     this.editForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        gender: ['', [Validators.required]],
-        dob: ['', Validators.required],
-        address: ['', Validators.required]
+      name: [this.name, Validators.required],
+      description: [this.description, [Validators.required]],
+      price: [this.price, [Validators.required, Validators.pattern(numericRegex)]]
     });
   }
 
   // convenience getter for easy access to form fields 
   get f() { return this.editForm.controls; }
 
-  editFormSubmit()
+  editFormSubmit() 
   {
 
-      this.submitted = true;
+    this.submitted = true;
 
-      // stop here if form is invalid
-      if (this.editForm.invalid) {
-          return;
-      }
-
-      this._commonService.userData.push(this.editForm.value);
-      console.log(this._commonService.userData);
+    // stop here if form is invalid
+    if (this.editForm.invalid) {
+      return;
+    }
+    console.log(this.editForm.value);
+    this._dialogRef.close(this.editForm.value)
 
   }
-  btnClick()
+  
+
+  close()
   {
-    this._router.navigate(['/login']);
+    this._dialogRef.close();
   }
 
 }

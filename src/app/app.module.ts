@@ -20,13 +20,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddprodComponent } from './addprod/addprod.component';
+// import { AddprodComponent } from './addprod/addprod.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditComponent,
     DeleteComponent,
-    MainComponent
+    MainComponent,
+    AddprodComponent,
+    // AddprodComponent
   ],
   imports: [
     BrowserModule,

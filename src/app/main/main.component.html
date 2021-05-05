@@ -3,8 +3,9 @@
         <mat-icon>menu</mat-icon>
     </button>
     <span>Users</span>
+    <button mat-button color="primary" class="add-prod-btn" (click)="addProd()">+ Add Product</button>
     <span class="example-spacer"></span>
-
+    
     <img src="/assets/profile.jpeg" alt="" srcset="" width="40px" class="img img-fluid" style="border-radius: 50%;" >
     <span> &nbsp;Jhon Doe</span>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
@@ -26,26 +27,22 @@
                                 Name
                             </th>
                             <th scope="col">
-                                Email
+                                Description
                             </th>
                             <th scope="col">
-                                Gender
-                            </th>
-                            <th scope="col">
-                                Address
+                                Price
                             </th>
                             <th scope="col">
                                 Action
                             </th>
                         </tr>
                     </thead>
-                    <tr *ngFor="let value of userdata">
+                    <tr *ngFor="let value of invData">
                         <td>{{value.Name}}</td>
-                        <td>{{value.Email}}</td>
-                        <td>{{value.Gender}}</td>
-                        <td>{{value.Address}}</td>
+                        <td>{{value.Description}}</td>
+                        <td>{{value.Price}}</td>
                         <td>
-                            <a (click)="edit(value.Id,value.Name,value.Email,value.Gender,value.Address)" style="display: inline-block;cursor: pointer;">
+                            <a (click)="edit(value.Id,value.Name,value.Description,value.Price)" style="display: inline-block;cursor: pointer;">
                                 <mat-icon>mode_edit</mat-icon>
                             </a>
                             <a (click)="delete(value.Id,value.Name)" style="display: inline-block;cursor: pointer;">
@@ -63,27 +60,17 @@
                         <mat-card-title>Progress</mat-card-title>
                     </mat-card-header>
                     <br>
-                    <mat-progress-bar mode="determinate" value="maleCount()"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="totalCount()"></mat-progress-bar>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <br>
-                    <span><b>Male Users : </b></span>
+                    <span><b>Total Items : </b></span>
                 </div>
                 <div class="col-md-4">
                     <br>
-                    <span>{{maleCount()}}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <br>
-                    <span><b>Female Users : </b></span>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <span>{{femaleCount()}}</span>
+                    <span>{{totalCount()}}</span>
                 </div>
             </div>
                 
