@@ -14,8 +14,10 @@ export class EditComponent implements OnInit {
 
   public id;
   public name;
-  public description;
-  public price;
+  public email;
+  public gender;
+  public address;
+  public mobile;
 
 
   constructor(
@@ -25,23 +27,29 @@ export class EditComponent implements OnInit {
     private _dialogRef: MatDialogRef<DeleteComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-
     this.id = data.Id;
     this.name = data.Name;
-    this.description = data.Description;
-    this.price = data.Price;
+    this.email = data.Email;
+    this.gender = data.Gender;
+    this.address = data.Address;
+    this.mobile = data.Mobile;
   }
   editForm: FormGroup;
   submitted = false;
   router: any;
 
+  ngOnInit() 
+  {
 
-  ngOnInit() {
+    // console.log(this.id + '' + this.name + '' + this.gender + '' + this.address + '' + this.mobile);
+
     let numericRegex = /^-?(0|[1-9]\d*)?$/;
     this.editForm = this.formBuilder.group({
       name: [this.name, Validators.required],
-      description: [this.description, [Validators.required]],
-      price: [this.price, [Validators.required, Validators.pattern(numericRegex)]]
+      email: [this.email, [Validators.required, Validators.email]],
+      gender: [this.gender, Validators.required],
+      address: [this.address, [Validators.required]],
+      mobile: [this.mobile, [Validators.required,Validators.maxLength(10), Validators.minLength(10), Validators.pattern(numericRegex)]]
     });
   }
 
@@ -50,16 +58,15 @@ export class EditComponent implements OnInit {
 
   editFormSubmit() 
   {
-
     this.submitted = true;
-
     // stop here if form is invalid
-    if (this.editForm.invalid) {
+    
+    if (this.editForm.invalid) 
+    {
       return;
     }
     console.log(this.editForm.value);
     this._dialogRef.close(this.editForm.value)
-
   }
   
 

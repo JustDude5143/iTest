@@ -5,7 +5,7 @@
         "Email": "rakesh@gmail.com",
         "Gender": "Male",
         "Address":"Pune,maharashtra,India",
-        "DateOfBirth":"10 July 1995"
+        "Mobile":"9689543085"
     },
     {
         "Id":"2",
@@ -13,7 +13,7 @@
         "Email": "nitin@gmail.com",
         "Gender": "Male",
         "Address":"Mumbai, Maharashtra, India",
-        "DateOfBirth":"10 May 1996"
+        "Mobile":"9689543085"
     },
     {
         "Id":"3",
@@ -21,7 +21,7 @@
         "Email": "rakesh@gmail.com",
         "Gender": "Male",
         "Address":"Pune,maharashtra,India",
-        "DateOfBirth":"10 July 1995"
+        "Mobile":"9689543085"
     },
     {
         "Id":"4",
@@ -29,7 +29,7 @@
         "Email": "nitin@gmail.com",
         "Gender": "Male",
         "Address":"Mumbai, Maharashtra, India",
-        "DateOfBirth":"10 May 1996"
+        "Mobile":"9689543085"
     },
     {
         "Id":"5",
@@ -37,7 +37,7 @@
         "Email": "kavita@gmail.com",
         "Gender": "Female",
         "Address":"Mumbai, Maharashtra, India",
-        "DateOfBirth":"30 Jan 1996"
+        "Mobile":"9689543085"
     },
     {
         "Id":"6",
@@ -45,6 +45,6 @@
         "Email": "shweta@gmail.com",
         "Gender": "Female",
         "Address":"Mumbai, Maharashtra, India",
-        "DateOfBirth":"20 May 1996"
+        "Mobile":"9689543085"
     }
 ]

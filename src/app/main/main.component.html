@@ -1,83 +1,141 @@
-<mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>Users</span>
-    <button mat-button color="primary" class="add-prod-btn" (click)="addProd()">+ Add Product</button>
-    <span class="example-spacer"></span>
-    
-    <img src="/assets/profile.jpeg" alt="" srcset="" width="40px" class="img img-fluid" style="border-radius: 50%;" >
-    <span> &nbsp;Jhon Doe</span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    </button>
-</mat-toolbar>
-<div class="container-fluid">
+<section>
+    <mat-toolbar>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Students Data</span>
+        <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        </button> -->
+    </mat-toolbar>
+</section>
+<section>
     <br>
-    <div class="row">
-        <div class="col-md-9">
-            <mat-card-header>
-                <mat-card-title>User List</mat-card-title>
-            </mat-card-header>
-
-            <mat-card-content>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">
-                                Name
-                            </th>
-                            <th scope="col">
-                                Description
-                            </th>
-                            <th scope="col">
-                                Price
-                            </th>
-                            <th scope="col">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tr *ngFor="let value of invData">
-                        <td>{{value.Name}}</td>
-                        <td>{{value.Description}}</td>
-                        <td>{{value.Price}}</td>
-                        <td>
-                            <a (click)="edit(value.Id,value.Name,value.Description,value.Price)" style="display: inline-block;cursor: pointer;">
-                                <mat-icon>mode_edit</mat-icon>
-                            </a>
-                            <a (click)="delete(value.Id,value.Name)" style="display: inline-block;cursor: pointer;">
-                                <mat-icon>delete_outline</mat-icon>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </mat-card-content>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <mat-card-header>
-                        <mat-card-title>Progress</mat-card-title>
-                    </mat-card-header>
-                    <br>
-                    <mat-progress-bar mode="determinate" value="totalCount()"></mat-progress-bar>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <br>
-                    <span><b>Total Items : </b></span>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <span>{{totalCount()}}</span>
-                </div>
-            </div>
-                
-            
-            
-            
-            
+    <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+        <div fxFlex="50" class="sec1" fxFlex.xs="55">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><b>Total students : </b><span>{{totalCount()}}</span></span>
         </div>
     </div>
-</div>
+</section>
+<section>
+    <div class="content" fxLayout="row" fxLayout.xs="column" fxFlexFill>
+
+        <div fxFlex="60" class="sec1" fxFlex.xs="55">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>Student Details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    Name
+                                </th>
+                                <th scope="col">
+                                    Email
+                                </th>
+                                <th scope="col">
+                                    Gender
+                                </th>
+                                <th scope="col">
+                                    Address
+                                </th>
+                                <th scope="col">
+                                    Mobile
+                                </th>
+                                <th scope="col">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let value of invData">
+                            <td>{{value.Name}}</td>
+                            <td>{{value.Email}}</td>
+                            <td>{{value.Gender}}</td>
+                            <td>{{value.Address}}</td>
+                            <td>{{value.Mobile}}</td>
+                            <td>
+                                <a (click)="edit(value.Id,value.Name,value.Email,value.Gender,value.Address,value.Mobile)"
+                                    style="display: inline-block;cursor: pointer;">
+                                    <mat-icon>mode_edit</mat-icon>
+                                </a>
+                                <a (click)="delete(value.Id,value.Name)" style="display: inline-block;cursor: pointer;">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxFlex="40" class="sec2">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Add Student</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div mat-dialog-content>
+                        <form [formGroup]="addForm" (ngSubmit)="addFormSubmit()">
+                            <mat-form-field class="full-width">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Name" formControlName="name"
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                </div>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="email" formControlName="email"
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Select Gender</mat-label>
+                                <mat-select matInput placeholder="Gender" formControlName="gender"
+                                    [ngClass]="{ 'is-invalid': submitted && f.gender.errors}">
+                                    <mat-option value="Male">Male</mat-option>
+                                    <mat-option value="Female">Female</mat-option>
+                                </mat-select>
+                                <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                                    <div *ngIf="f.gender.errors.required">Gender is required</div>
+                                </div>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Address</mat-label>
+                                <input matInput placeholder="Address" formControlName="address"
+                                    [ngClass]="{ 'is-invalid': submitted && f.address.errors}">
+                                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.address.errors.required">Address is required</div>
+                                </div>
+                            </mat-form-field>
+                            <mat-form-field class="full-width">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput placeholder="Mobile Number" formControlName="mobile"
+                                    [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" maxlength="10">
+                                <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                                    <div *ngIf="f.mobile.errors.pattern">Enter Only Numeric value</div>
+                                    <div *ngIf="f.mobile.errors.minlength">minimum 10 digits required</div>
+                                    <div *ngIf="f.mobile.errors.maxlength">maximum 10 digits can enter</div>
+                                </div>
+                            </mat-form-field>
+                            <div mat-dialog-actions>
+                                <button mat-button mat-dialog-close>Close</button>
+                                <button type="submit" mat-button>Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+</section>
+
+<section>
+
+</section>

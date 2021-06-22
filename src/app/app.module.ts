@@ -20,8 +20,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddprodComponent } from './addprod/addprod.component';
+import { HttpClientModule } from '@angular/common/http';
 // import { AddprodComponent } from './addprod/addprod.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,6 @@ import { AddprodComponent } from './addprod/addprod.component';
     EditComponent,
     DeleteComponent,
     MainComponent,
-    AddprodComponent,
     // AddprodComponent
   ],
   imports: [
@@ -51,9 +53,14 @@ import { AddprodComponent } from './addprod/addprod.component';
     MatNativeDateModule,
     MatToolbarModule,
     MatProgressBarModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule,
+    MatGridListModule,
+    FlexLayoutModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Edit</h1>
 <div mat-dialog-content>
     <form [formGroup]="editForm" (ngSubmit)="editFormSubmit()">
-        <mat-form-field>
+        <mat-form-field class="full-width">
             <mat-label>Name</mat-label>
             <input matInput placeholder="Name" formControlName="name"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -9,21 +9,43 @@
                 <div *ngIf="f.name.errors.required">Name is required</div>
             </div>
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>Description</mat-label>
-            <input matInput placeholder="email" formControlName="description"
-                [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
-                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                <div *ngIf="f.description.errors.required">Description is required</div>
+        <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="email" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                <div *ngIf="f.email.errors.required">Email is required</div>
             </div>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Price</mat-label>
-            <input matInput placeholder="Address" formControlName="price"
-                [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
-            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
-                <div *ngIf="f.price.errors.required">Price is required</div>
-                <div *ngIf="f.price.errors.pattern">Enter Only Numeric value</div>
+            <mat-label>Select Gender</mat-label>
+            <mat-select matInput placeholder="Gender" formControlName="gender"
+                [ngClass]="{ 'is-invalid': submitted && f.gender.errors}">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required">Gender is required</div>
+            </div>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" formControlName="address"
+                [ngClass]="{ 'is-invalid': submitted && f.address.errors}">
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput placeholder="Mobile Number" formControlName="mobile"
+                [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" maxlength="10">
+            <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+                <div *ngIf="f.mobile.errors.pattern">Enter Only Numeric value</div>
+                <div *ngIf="f.mobile.errors.minlength">minimum 10 digits required</div>
+                <div *ngIf="f.mobile.errors.maxlength">maximum 10 digits can enter</div>
             </div>
         </mat-form-field>
         <div mat-dialog-actions>

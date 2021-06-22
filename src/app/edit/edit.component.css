@@ -1,6 +1,14 @@
-mat-form-field {
+.full-width{
     width: 100%;
   }
   .mat-radio-button ~ .mat-radio-button {
     margin-left: 16px;
   }
+  .mat-dialog-content
+{
+    overflow-y: none;
+
+    min-height: 270px;
+    max-height: 500px;
+
+}
